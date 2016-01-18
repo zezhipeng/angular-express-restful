@@ -1,0 +1,17 @@
+extends layout
+block content
+   .container(ng-app="app")
+      form.col-md-4
+          fieldset
+             legend Angular-Express-Restful
+             .form-group.has-feedback
+                 input.form-control#username(type="text" minLength=4 placeholder="username")
+                 span.fa.fa-user.form-control-feedback(style="margin-top:10px;")
+             .form-group.has-feedback
+                 input.form-control#passworl(type="password" minLength=4 placeholder="password")
+                 span.fa.fa-lock.form-control-feedback(style="margin-top:10px;")
+             .form-group.has-feedback
+                 input.form-control#email(type="email" placeholder="Email")
+                 span.fa.fa-envelope.form-control-feedback(style="margin-top:10px;")
+             button.btn.btn-warning(type="submit") 提交
+   script(src="/js/app.js")
