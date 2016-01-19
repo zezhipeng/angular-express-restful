@@ -1,17 +1,47 @@
 extends layout
 block content
-   .container(ng-app="app")
-      form.col-md-4
+   .container(ng-controller="restful")
+      br
+      br
+      ng-form.col-md-4(novalidate name="userForm" )
           fieldset
              legend Angular-Express-Restful
              .form-group.has-feedback
-                 input.form-control#username(type="text" minLength=4 placeholder="username")
+                 input.form-control#username(type="text" minLength=4 placeholder="username" ng-model="user.name" required)
                  span.fa.fa-user.form-control-feedback(style="margin-top:10px;")
              .form-group.has-feedback
-                 input.form-control#passworl(type="password" minLength=4 placeholder="password")
+                 input.form-control#passworl(type="password" minLength=4 placeholder="password" ng-model="user.password" required)
                  span.fa.fa-lock.form-control-feedback(style="margin-top:10px;")
              .form-group.has-feedback
-                 input.form-control#email(type="email" placeholder="Email")
-                 span.fa.fa-envelope.form-control-feedback(style="margin-top:10px;")
-             button.btn.btn-warning(type="submit") 提交
+                 input.form-control#email(type="email" placeholder="Email" ng-model="user.email" required)
+                 span.fa.fa-envelope.form-control-feedback(style="margin-top:10px;" )
+             button.btn.btn-warning(type="submit" ng-disabled="userForm.$invalid" ng-click="login(user)") 提交
+      .col-md-8
+          table.table.table-default.table-hover
+              thead
+                tr
+                    th #
+                    th 用户名
+                    th 密码
+                    th 邮箱
+                    th 修改
+                    th 删除
+              tbody
+                  tr(ng-repeat="user in users" ng-init="user.edit=false;")
+                    td {{$index}}
+                    td {{user.name}}
+                    td
+                        input.form-control(ng-model="user.password" ng-show="user.edit")
+                        div(ng-show="!user.edit") {{user.password}}
+                    td
+                        input.form-control(ng-model="user.email" ng-show="user.edit")
+                        div(ng-show="!user.edit") {{user.email}}
+                    td
+                        button.btn.btn-primary(style="padding:2px 5px" ng-click="user.edit=!user.edit;" ng-show="!user.edit")
+                            span.fa.fa-edit
+                        button.btn.btn-warning(style="padding:2px 5px" ng-click="put(user)" ng-show="user.edit")
+                            span.fa.fa-send
+                    td
+                        button.btn.btn-danger(style="padding:2px 5px" ng-click="del(user)")
+                            span.fa.fa-trash
    script(src="/js/app.js")

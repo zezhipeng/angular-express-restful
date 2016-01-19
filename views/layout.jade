@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app="app")
   head
     title= title
     link(href="/paper/bootstrap.min.css" rel="stylesheet")
@@ -7,5 +7,6 @@ html
     script(src="/jquery/dist/jquery.min.js")
     script(src="/bootstrap/dist/js/bootstrap.min.js")
     script(src="/angular/angular.min.js")
+    script(src="/angular/angular-resource.min.js")
   body
     block content
